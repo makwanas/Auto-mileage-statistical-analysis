@@ -1,0 +1,109 @@
+---
+title: " Final project - R Notebook"
+output: html_notebook
+name: "Saurabhkumar Makwana"
+email: "makwanas@oregonstate.edu"
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library("tidyverse")
+library("tidymodels")
+library("plotly")
+library("skimr")
+library("caret")
+library("Sleuth3")
+library('tsibble')
+library('lubridate')
+library('openintro')
+library('fpp3')
+library('ggplot2')
+library('dplyr')
+```
+
+
+```{r}
+mpg=read_csv("mpg.csv")
+```
+
+```{r}
+mpg
+```
+
+```{r}
+skim(mpg)
+```
+
+```{r}
+mpg$horsepower[is.na(mpg$horsepower)] <- 0
+```
+
+```{r}
+mpg %>%ggplot( aes(y =mpg, x =displacement)) +geom_point() +ggtitle("Scatterplot for mpg and displacement")
+```
+
+```{r}
+mpg %>%ggplot( aes(y =mpg, x =displacement)) +geom_smooth() +ggtitle("Relation between mpg and displacement")
+```
+
+```{r}
+mpg %>%ggplot( aes(y =mpg, x =horsepower, color=cylinders)) +geom_point() +ggtitle("Scatterplot for mpg and horsepower")
+```
+
+```{r}
+mpg %>%ggplot( aes(y =mpg, x =horsepower)) +geom_point() +ggtitle("Scatterplot for mpg and horse power")
+```
+
+```{r}
+mpg %>%ggplot( aes(y =mpg, x =horsepower)) +geom_smooth() +ggtitle("Relation for mpg and horsepower")
+```
+
+```{r}
+mpg %>%ggplot( aes(y =mpg, x =acceleration)) +geom_point() +ggtitle("Scatterplot for mpg and acceleration")
+```
+
+```{r}
+mpg %>%ggplot( aes(y =mpg, x =acceleration)) +geom_smooth() +ggtitle("Relation for mpg and acceleration")
+```
+
+```{r}
+mpg %>%ggplot( aes(y =mpg, x =cylinders)) +geom_point() +ggtitle("Scatterplot for mpg and cylinders")
+```
+
+```{r}
+modelmpg<-lm(mpg ~., data=mpg)
+```
+
+```{r}
+summary(modelmpg)
+```
+
+```{r}
+modelmpg1<-lm(mpg ~ weight+`model-year`, data=mpg)
+```
+
+```{r}
+summary(modelmpg1)
+```
+
+```{r}
+anova(modelmpg, modelmpg1)
+```
+
+```{r}
+qplot(.fitted, .resid, data=modelmpg1)
+```
+
+```{r}
+confint(modelmpg, level=0.95)
+```
+
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
