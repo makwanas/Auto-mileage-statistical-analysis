@@ -1,4 +1,5 @@
-# ST-512-Final-project
+# Auto-mileage-statistical-analysis
+
 Final project for my ST-512(Methods of Data Analysis) course which describes my research to apply statistical methods in a dataset to describe the correlation between different exploratory variables.
 
 I'm using the mpg-dataset provided, which stands for mileage per gallon performance of various cars which is downloaded from UCI Machine Learning Repository. The goal of this research is to answer these 2 research questions:
